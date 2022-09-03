@@ -1,9 +1,10 @@
 # shortlist_aaya_kya
 A Python program which takes your erp credentials as input and alerts in-case your name pops up in noticeboard ;)
 
-# 2 points to remember
+# Points to remember
 1. Python and pip must be installed in the system to run this
 2. Credentials of erp must be put in correctly, otherwise it will pause at the erp login screen. Better look at the terminal then.
+3. There is no database used in this, so none of your credentials are being exported to somewhere else
 
 # How to run
 1. Clone the repository ```git clone https://github.com/abhilashdzr/shortlist_aaya_kya.git```
