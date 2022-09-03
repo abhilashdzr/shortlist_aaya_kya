@@ -111,6 +111,7 @@ class Hack:
     html_tree = html.fromstring(self.driver.page_source)
 
     i = 3 
+    mx_timestamp = datetime(2022,9,3,0,0,0,0)
     while(True):
       try:
         notice_text = html_tree.xpath(f"(.//tr[@role='row'])[{i}]/td[6]/a/@title")[0]
@@ -125,8 +126,10 @@ class Hack:
         minute = int(t.split(":")[1])
 
         time_stamp = datetime(yy,mm,dd,h,minute,0)
+        mx_timestamp = max(mx_timestamp, time)
+
         if(time_stamp<=self.last_stamp):
-          self.last_stamp = time_stamp
+          self.last_stamp = mx_timestamp
           break  
 
         os.system('play -nq -t alsa synth {} sine {}'.format(5, 150))
