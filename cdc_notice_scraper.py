@@ -114,11 +114,14 @@ class Hack:
     while(True):
       try:
         notice_text = html_tree.xpath(f"(.//tr[@role='row'])[{i}]/td[6]/a/@title")[0]
+
+        os.system('play -nq -t alsa synth {} sine {}'.format(5, 220))
+
         if re.search(self.username, notice_text, re.IGNORECASE) or re.search(self.name, notice_text, re.IGNORECASE):
           print(notice_text)
-          print("found")
+          print("your name found")
           # print('\007')
-          os.system('play -nq -t alsa synth {} sine {}'.format(10, 220))
+          os.system('play -nq -t alsa synth {} sine {}'.format(10, 440))
           
         notice_time = html_tree.xpath(f"(.//tr[@role='row'])[{i}]/td[8]/@title")[0]
         date = notice_time.split(" ")[0]
