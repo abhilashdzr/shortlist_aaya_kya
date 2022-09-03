@@ -115,14 +115,6 @@ class Hack:
       try:
         notice_text = html_tree.xpath(f"(.//tr[@role='row'])[{i}]/td[6]/a/@title")[0]
 
-        os.system('play -nq -t alsa synth {} sine {}'.format(5, 220))
-
-        if re.search(self.username, notice_text, re.IGNORECASE) or re.search(self.name, notice_text, re.IGNORECASE):
-          print(notice_text)
-          print("your name found")
-          # print('\007')
-          os.system('play -nq -t alsa synth {} sine {}'.format(10, 440))
-          
         notice_time = html_tree.xpath(f"(.//tr[@role='row'])[{i}]/td[8]/@title")[0]
         date = notice_time.split(" ")[0]
         t = notice_time.split(" ")[1]
@@ -135,7 +127,15 @@ class Hack:
         time_stamp = datetime(yy,mm,dd,h,minute,0)
         if(time_stamp<=self.last_stamp):
           self.last_stamp = time_stamp
-          break   
+          break  
+
+        os.system('play -nq -t alsa synth {} sine {}'.format(5, 150))
+
+        if re.search(self.username, notice_text, re.IGNORECASE) or re.search(self.name, notice_text, re.IGNORECASE):
+          print(notice_text)
+          print("your name found")
+          # print('\007')
+          os.system('play -nq -t alsa synth {} sine {}'.format(10, 300))
         
         i+=1
           
@@ -163,7 +163,7 @@ def take_input():
   m[s_q] = s_ans 
   m[t_q] = t_ans 
 
-  ts = datetime(2022, 9, 3, 12, 0, 0, 0)
+  ts = datetime.now()
   return Hack(username,password,name,m,ts)
 #datetime can be set to right now using datetime.now()
 
