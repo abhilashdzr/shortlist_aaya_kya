@@ -10,7 +10,7 @@ import re
 import sys
 
 class Hack:
-  def __init__(self,username,password,roll_no,name,m,ts):
+  def __init__(self,username,password,name,m,ts):
 
     user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
     # options.headless = True
@@ -22,7 +22,6 @@ class Hack:
 
     self.password = password
     self.username = username  
-    self.roll_no = roll_no 
     self.name = name  
     self.m = m  
     self.driver = driver
@@ -90,10 +89,6 @@ class Hack:
       time.sleep(2)
 
 
-      #start a scheduler daemon
-      # sched = BackgroundScheduler(daemon=True)
-      # sched.add_job(self.check_jsp(),'interval',minutes=5)
-      # sched.start()
       while(True):
         self.check_jsp()
         time.sleep(300)
@@ -119,7 +114,7 @@ class Hack:
     while(True):
       try:
         notice_text = html_tree.xpath(f"(.//tr[@role='row'])[{i}]/td[6]/a/@title")[0]
-        if re.search(self.roll_no, notice_text, re.IGNORECASE) or re.search(self.name, notice_text, re.IGNORECASE):
+        if re.search(self.username, notice_text, re.IGNORECASE) or re.search(self.name, notice_text, re.IGNORECASE):
           print(notice_text)
           print("found")
           # print('\007')
@@ -144,7 +139,6 @@ class Hack:
       except:
         break  
 
-    # self.driver.back()
 
 
 #main function
@@ -153,7 +147,6 @@ class Hack:
 def take_input():
   username = input("Give the username ")
   password = input("Give the password ")
-  roll_no = input("Give your roll no ")    #19EX20030
   name = input("Give your name ")
   f_q = input("Input 1st question ")
   f_ans = input("Input 1st answer ")
@@ -168,7 +161,7 @@ def take_input():
   m[t_q] = t_ans 
 
   ts = datetime(2022, 9, 3, 12, 0, 0, 0)
-  return Hack(username,password,roll_no,name,m,ts)
+  return Hack(username,password,name,m,ts)
 #datetime can be set to right now using datetime.now()
 
 hack = take_input()
